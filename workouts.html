@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse | Workouts & Interval Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Workout & Timer Specific Styles */
+    .timer-hero-card {
+      background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.12), transparent 70%), var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px 24px;
+      text-align: center;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-card);
+    }
+    .timer-phase-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      transition: all 0.3s ease;
+    }
+    .timer-phase-badge.rest {
+      background: rgba(6, 182, 212, 0.2);
+      color: #06b6d4;
+      border-color: rgba(6, 182, 212, 0.4);
+    }
+    .timer-display {
+      font-size: 4.8rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin: 10px 0;
+      color: #fff;
+    }
+    .timer-info-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .timer-controls {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .timer-presets {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .preset-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .preset-pill:hover, .preset-pill.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Routine Cards */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-glow);
+    }
+    .routines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .routine-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .routine-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    .routine-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-title">Pulse <span class="brand-tag">Hub</span></div>
+      </a>
+
+      <!-- Page Links -->
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Overview</span></a></li>
+        <li><a href="workouts.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M6 8H5a4 4 0 0 0 0 8h1"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg><span>Workouts</span></a></li>
+        <li><a href="nutrition.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 12h20"></path><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg><span>Nutrition</span></a></li>
+        <li><a href="analytics.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg><span>Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>Settings</span></a></li>
+      </ul>
+
+      <!-- Streak -->
+      <div class="nav-actions">
+        <div class="streak-pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.163-7.333-3.856-7.333 3.856 1.399-8.163-5.934-5.784 8.2-1.192zm0 5.702l-2.228 4.516-4.981.724 3.604 3.513-.85 4.958 4.455-2.342 4.455 2.342-.85-4.958 3.604-3.513-4.981-.724z"/></svg>
+          <span id="streakCount">6</span> Days
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Workouts & Interval Training</h1>
+        <p>Use the live audio interval timer or explore guided workout routines.</p>
+      </div>
+    </div>
+
+    <!-- Interactive HIIT / Tabata Interval Timer -->
+    <div class="timer-hero-card">
+      <div id="timerPhase" class="timer-phase-badge">WORK</div>
+      <div id="timerDisplay" class="timer-display">00:30</div>
+      
+      <div class="timer-info-row">
+        <span>Set: <strong id="timerSetCount" style="color: #fff;">1 / 8</strong></span>
+        <span>•</span>
+        <span>Work: <strong id="workDurationText" style="color: #fff;">30s</strong></span>
+        <span>•</span>
+        <span>Rest: <strong id="restDurationText" style="color: #fff;">15s</strong></span>
+      </div>
+
+      <div class="timer-controls">
+        <button id="timerToggleBtn" class="btn btn-primary" style="min-width: 130px; justify-content: center;">
+          <svg id="timerPlayIcon" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span id="timerToggleText">Start Workout</span>
+        </button>
+        <button id="timerResetBtn" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <div class="timer-presets">
+        <button class="preset-pill active" data-work="30" data-rest="15" data-sets="8">Classic HIIT (30s/15s)</button>
+        <button class="preset-pill" data-work="20" data-rest="10" data-sets="8">Tabata (20s/10s)</button>
+        <button class="preset-pill" data-work="45" data-rest="15" data-sets="6">Endurance (45s/15s)</button>
+      </div>
+    </div>
+
+    <!-- Workout Routine Library -->
+    <div class="page-header" style="padding-top: 10px;">
+      <div class="page-title">
+        <h2 style="font-size: 1.3rem; font-weight: 700;">Workout Routine Library</h2>
+      </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-cat="all">All Routines</button>
+      <button class="filter-btn" data-cat="HIIT">HIIT ⚡</button>
+      <button class="filter-btn" data-cat="Strength">Strength 🏋️</button>
+      <button class="filter-btn" data-cat="Cardio">Cardio 🏃</button>
+      <button class="filter-btn" data-cat="Mobility">Yoga & Mobility 🧘</button>
+    </div>
+
+    <!-- Routines Grid -->
+    <div class="routines-grid" id="routinesGrid">
+      <!-- Populated via workouts.js -->
+    </div>
+
+    <!-- Logged Workouts History Table -->
+    <div class="card" style="margin-bottom: 50px;">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">📋</div>
+          Workout Log History
+        </div>
+      </div>
+      <div class="activity-list" id="fullWorkoutLog">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/workouts.js"></script>
+</body>
+</html>

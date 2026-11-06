@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse | Analytics & Trends</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Analytics & Chart Specific Styles */
+    .chart-container-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 30px;
+    }
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .chart-toggle-group {
+      display: flex;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+    }
+    .chart-toggle-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chart-toggle-btn.active {
+      background: rgba(16, 185, 129, 0.2);
+      color: #fff;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .chart-svg-wrap {
+      width: 100%;
+      height: 240px;
+      position: relative;
+    }
+    .bar-rect {
+      transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), y 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .bar-rect:hover {
+      filter: brightness(1.25);
+    }
+
+    /* Heatmap Grid */
+    .heatmap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(28, 1fr);
+      gap: 6px;
+      margin-top: 18px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .heat-cell {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .heat-cell:hover {
+      transform: scale(1.2);
+    }
+    .heat-lvl-1 { background: rgba(16, 185, 129, 0.2); }
+    .heat-lvl-2 { background: rgba(16, 185, 129, 0.45); }
+    .heat-lvl-3 { background: rgba(16, 185, 129, 0.75); }
+    .heat-lvl-4 { background: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-title">Pulse <span class="brand-tag">Hub</span></div>
+      </a>
+
+      <!-- Page Links -->
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Overview</span></a></li>
+        <li><a href="workouts.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M6 8H5a4 4 0 0 0 0 8h1"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg><span>Workouts</span></a></li>
+        <li><a href="nutrition.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 12h20"></path><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg><span>Nutrition</span></a></li>
+        <li><a href="analytics.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg><span>Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>Settings</span></a></li>
+      </ul>
+
+      <!-- Streak -->
+      <div class="nav-actions">
+        <div class="streak-pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.163-7.333-3.856-7.333 3.856 1.399-8.163-5.934-5.784 8.2-1.192zm0 5.702l-2.228 4.516-4.981.724 3.604 3.513-.85 4.958 4.455-2.342 4.455 2.342-.85-4.958 3.604-3.513-4.981-.724z"/></svg>
+          <span id="streakCount">6</span> Days
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Performance Analytics & Trends</h1>
+        <p>Review 7-day progress patterns, step velocity, and historical consistency.</p>
+      </div>
+    </div>
+
+    <!-- 4 High-Level Summary Stats Cards -->
+    <div class="dashboard-grid" style="margin-bottom: 24px;">
+      <div class="metric-card" style="grid-column: span 3;">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">AVG DAILY BURN</span>
+        <div style="font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin: 6px 0; color: #f43f5e;">2,115 <span style="font-size: 0.85rem; color: var(--text-subtle);">kcal</span></div>
+        <div style="font-size: 0.75rem; color: #10b981;">▲ +12% from last week</div>
+      </div>
+      <div class="metric-card" style="grid-column: span 3;">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">AVG DAILY STEPS</span>
+        <div style="font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin: 6px 0; color: #f59e0b;">10,120 <span style="font-size: 0.85rem; color: var(--text-subtle);">steps</span></div>
+        <div style="font-size: 0.75rem; color: #10b981;">▲ Met target 6/7 days</div>
+      </div>
+      <div class="metric-card" style="grid-column: span 3;">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">TOTAL ACTIVE TIME</span>
+        <div style="font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin: 6px 0; color: #10b981;">5.8 <span style="font-size: 0.85rem; color: var(--text-subtle);">hrs</span></div>
+        <div style="font-size: 0.75rem; color: var(--text-subtle);">Across 9 sessions</div>
+      </div>
+      <div class="metric-card" style="grid-column: span 3;">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">CONSISTENCY SCORE</span>
+        <div style="font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin: 6px 0; color: #06b6d4;">92%</div>
+        <div style="font-size: 0.75rem; color: #06b6d4;">Current 6-day streak 🔥</div>
+      </div>
+    </div>
+
+    <!-- Interactive Weekly Chart Card -->
+    <div class="chart-container-card">
+      <div class="chart-header">
+        <div>
+          <h2 style="font-size: 1.15rem; font-weight: 700;" id="chartTitle">Weekly Active Calories Burned</h2>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Hover on bars to inspect daily values</span>
+        </div>
+        <div class="chart-toggle-group">
+          <button class="chart-toggle-btn active" data-metric="calories">Calories</button>
+          <button class="chart-toggle-btn" data-metric="steps">Steps</button>
+          <button class="chart-toggle-btn" data-metric="water">Hydration</button>
+        </div>
+      </div>
+
+      <div class="chart-svg-wrap">
+        <svg id="weeklyChartSvg" width="100%" height="100%" viewBox="0 0 700 220" preserveAspectRatio="none">
+          <!-- Dynamically generated via analytics.js -->
+        </svg>
+      </div>
+    </div>
+
+    <!-- Monthly Consistency Heatmap Card -->
+    <div class="heatmap-card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">📅</div>
+          Monthly Workout Intensity Heatmap
+        </div>
+        <span style="font-size: 0.78rem; color: var(--text-subtle);">Past 28 Days</span>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">Darker green indicates intense workouts exceeding daily movement goals.</p>
+      
+      <div class="heatmap-grid" id="heatmapGrid">
+        <!-- Rendered via analytics.js -->
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse | Nutrition & Macro Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .macro-overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 30px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      align-items: center;
+    }
+    .macro-calories-box {
+      border-right: 1px solid var(--border-subtle);
+      padding-right: 24px;
+      text-align: center;
+    }
+    .macro-bars-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .macro-bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .macro-header-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .macro-val {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Preset Quick Buttons */
+    .quick-meal-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 16px;
+    }
+    .meal-preset-tag {
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .meal-preset-tag:hover {
+      background: rgba(16, 185, 129, 0.15);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+
+    /* Meal Groups */
+    .meal-category-block {
+      margin-bottom: 24px;
+    }
+    .meal-category-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .delete-meal-btn {
+      background: none;
+      border: none;
+      color: var(--text-subtle);
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .delete-meal-btn:hover {
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .macro-overview-card {
+        grid-template-columns: 1fr;
+      }
+      .macro-calories-box {
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        padding-right: 0;
+        padding-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-title">Pulse <span class="brand-tag">Hub</span></div>
+      </a>
+
+      <!-- Page Links -->
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Overview</span></a></li>
+        <li><a href="workouts.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M6 8H5a4 4 0 0 0 0 8h1"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg><span>Workouts</span></a></li>
+        <li><a href="nutrition.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 12h20"></path><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg><span>Nutrition</span></a></li>
+        <li><a href="analytics.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg><span>Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>Settings</span></a></li>
+      </ul>
+
+      <!-- Streak -->
+      <div class="nav-actions">
+        <div class="streak-pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.163-7.333-3.856-7.333 3.856 1.399-8.163-5.934-5.784 8.2-1.192zm0 5.702l-2.228 4.516-4.981.724 3.604 3.513-.85 4.958 4.455-2.342 4.455 2.342-.85-4.958 3.604-3.513-4.981-.724z"/></svg>
+          <span id="streakCount">6</span> Days
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Nutrition & Macro Tracker</h1>
+        <p>Log your meals, track calories, and maintain optimal macronutrient balance.</p>
+      </div>
+    </div>
+
+    <!-- Macronutrient Progress Overview Card -->
+    <div class="macro-overview-card">
+      <div class="macro-calories-box">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase;">CALORIES IN</span>
+        <div style="font-size: 3rem; font-weight: 800; font-family: var(--font-mono); margin: 6px 0;" id="totalConsumedCalories">1,240</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Target: <strong>2,200</strong> kcal</div>
+      </div>
+
+      <div class="macro-bars-list">
+        <!-- Protein -->
+        <div class="macro-bar-item">
+          <div class="macro-header-row">
+            <span style="color: #10b981;">Protein</span>
+            <span class="macro-val"><span id="totalProtein">96</span>g / 150g</span>
+          </div>
+          <div class="progress-track">
+            <div id="barProtein" class="progress-fill" style="width: 64%; background: #10b981;"></div>
+          </div>
+        </div>
+
+        <!-- Carbs -->
+        <div class="macro-bar-item">
+          <div class="macro-header-row">
+            <span style="color: #f59e0b;">Carbohydrates</span>
+            <span class="macro-val"><span id="totalCarbs">112</span>g / 220g</span>
+          </div>
+          <div class="progress-track">
+            <div id="barCarbs" class="progress-fill" style="width: 51%; background: #f59e0b;"></div>
+          </div>
+        </div>
+
+        <!-- Fats -->
+        <div class="macro-bar-item">
+          <div class="macro-header-row">
+            <span style="color: #8b5cf6;">Healthy Fats</span>
+            <span class="macro-val"><span id="totalFat">38</span>g / 65g</span>
+          </div>
+          <div class="progress-track">
+            <div id="barFat" class="progress-fill" style="width: 58%; background: #8b5cf6;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two Column Layout: Add Meal Form & Grouped Meal Log -->
+    <div class="dashboard-grid">
+      <!-- Left: Add Meal Form -->
+      <div class="card" style="grid-column: span 5;">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">+</div>
+            Log Meal or Food
+          </div>
+        </div>
+
+        <!-- Quick 1-Click Fill Presets -->
+        <label class="form-label">Quick Suggestions:</label>
+        <div class="quick-meal-presets">
+          <button class="meal-preset-tag" data-name="Avocado Sourdough Toast" data-type="Breakfast" data-cal="320" data-p="10" data-c="35" data-f="16">+ Avocado Toast</button>
+          <button class="meal-preset-tag" data-name="Grilled Salmon & Sweet Potato" data-type="Dinner" data-cal="580" data-p="42" data-c="48" data-f="22">+ Salmon & Rice</button>
+          <button class="meal-preset-tag" data-name="Whey Protein & Banana" data-type="Snack" data-cal="250" data-p="28" data-c="30" data-f="3">+ Protein Shake</button>
+        </div>
+
+        <form id="addMealForm">
+          <div class="form-group">
+            <label class="form-label">Food / Meal Name</label>
+            <input type="text" id="mealNameInput" class="form-input" placeholder="e.g. Chicken Caesar Wrap" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Meal Slot</label>
+            <select id="mealTypeSelect" class="form-select">
+              <option value="Breakfast">Breakfast 🥐</option>
+              <option value="Lunch">Lunch 🥗</option>
+              <option value="Dinner">Dinner 🍲</option>
+              <option value="Snack">Snack 🍏</option>
+            </select>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Calories (kcal)</label>
+              <input type="number" id="mealCalInput" class="form-input" placeholder="450" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Protein (g)</label>
+              <input type="number" id="mealProteinInput" class="form-input" placeholder="30">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Carbs (g)</label>
+              <input type="number" id="mealCarbsInput" class="form-input" placeholder="45">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Fat (g)</label>
+              <input type="number" id="mealFatInput" class="form-input" placeholder="12">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+            Add to Daily Log
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Today's Grouped Meal Diary -->
+      <div class="card" style="grid-column: span 7;">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">📖</div>
+            Today's Food Diary
+          </div>
+        </div>
+
+        <div id="mealDiaryContainer">
+          <!-- Populated by nutrition.js -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/nutrition.js"></script>
+</body>
+</html>

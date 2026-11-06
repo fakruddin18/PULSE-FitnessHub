@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse | Fitness & Wellness Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Global Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-title">Pulse <span class="brand-tag">Hub</span></div>
+      </a>
+
+      <!-- Page Links -->
+      <ul class="nav-links">
+        <li>
+          <a href="index.html" class="nav-link active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a href="workouts.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M6 8H5a4 4 0 0 0 0 8h1"></path>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+            </svg>
+            <span>Workouts</span>
+          </a>
+        </li>
+        <li>
+          <a href="nutrition.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 12h20"></path>
+              <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path>
+            </svg>
+            <span>Nutrition</span>
+          </a>
+        </li>
+        <li>
+          <a href="analytics.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="settings.html" class="nav-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Actions & Streak -->
+      <div class="nav-actions">
+        <div class="streak-pill" title="Current Daily Streak">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.163-7.333-3.856-7.333 3.856 1.399-8.163-5.934-5.784 8.2-1.192zm0 5.702l-2.228 4.516-4.981.724 3.604 3.513-.85 4.958 4.455-2.342 4.455 2.342-.85-4.958 3.604-3.513-4.981-.724z"/>
+          </svg>
+          <span id="streakCount">6</span> Days Streak
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Dashboard Content -->
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1 id="welcomeUser">Welcome back, Alex 👋</h1>
+        <p>Here is your daily activity summary and performance goals.</p>
+      </div>
+      <div class="header-actions">
+        <button id="quickLogBtn" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Log Activity</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Top Dashboard Grid -->
+    <div class="dashboard-grid">
+      <!-- Activity Rings Card -->
+      <div class="card ring-card">
+        <div class="card-header" style="width: 100%;">
+          <div class="card-title">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
+            Today's Rings
+          </div>
+          <span style="font-size: 0.78rem; color: var(--text-subtle);">Daily Targets</span>
+        </div>
+
+        <div class="rings-wrapper">
+          <svg class="rings-svg" viewBox="0 0 200 200">
+            <!-- Outer Ring: Calories (Red/Orange) -->
+            <circle class="ring-bg" cx="100" cy="100" r="82" stroke-width="12"></circle>
+            <circle id="ringCalories" class="ring-progress" cx="100" cy="100" r="82" stroke="#f43f5e" stroke-width="12" stroke-dasharray="515" stroke-dashoffset="515"></circle>
+
+            <!-- Middle Ring: Active Time (Green) -->
+            <circle class="ring-bg" cx="100" cy="100" r="64" stroke-width="12"></circle>
+            <circle id="ringTime" class="ring-progress" cx="100" cy="100" r="64" stroke="#10b981" stroke-width="12" stroke-dasharray="402" stroke-dashoffset="402"></circle>
+
+            <!-- Inner Ring: Hydration (Cyan) -->
+            <circle class="ring-bg" cx="100" cy="100" r="46" stroke-width="12"></circle>
+            <circle id="ringWater" class="ring-progress" cx="100" cy="100" r="46" stroke="#06b6d4" stroke-width="12" stroke-dasharray="289" stroke-dashoffset="289"></circle>
+          </svg>
+          <div class="ring-center-stat">
+            <span class="ring-score" id="overallScore">78%</span>
+            <span class="ring-score-label">Achieved</span>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="ring-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #f43f5e;"></div>
+            <span>Move</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #10b981;"></div>
+            <span>Exercise</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: #06b6d4;"></div>
+            <span>Hydrate</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metric Cards Grid -->
+      <div class="metrics-column">
+        <!-- 1. Calories Burned -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">ACTIVE ENERGY</span>
+            <div class="card-icon" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-number" id="dashCalories">1,480</span>
+            <span class="metric-unit">kcal</span>
+            <div class="metric-sub">Goal: <span id="goalCaloriesText">2,200</span> kcal</div>
+            <div class="progress-track">
+              <div id="barCalories" class="progress-fill" style="width: 67%; background: #f43f5e;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Step Count -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">STEP COUNT</span>
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-number" id="dashSteps">7,650</span>
+            <span class="metric-unit">steps</span>
+            <div class="metric-sub">Goal: <span id="goalStepsText">10,000</span> steps</div>
+            <div class="progress-track">
+              <div id="barSteps" class="progress-fill" style="width: 76%; background: #f59e0b;"></div>
+            </div>
+          </div>
+          <button id="addStepsQuick" class="btn btn-secondary btn-sm" style="margin-top: 10px;">+ 1,000 Steps</button>
+        </div>
+
+        <!-- 3. Hydration Level -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">HYDRATION</span>
+            <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-number" id="dashWater">1,750</span>
+            <span class="metric-unit">ml</span>
+            <div class="metric-sub">Goal: <span id="goalWaterText">2,500</span> ml</div>
+            <div class="progress-track">
+              <div id="barWater" class="progress-fill" style="width: 70%; background: #06b6d4;"></div>
+            </div>
+          </div>
+          <div class="quick-log-row">
+            <button id="addWater250" class="quick-btn">+250 ml</button>
+            <button id="addWater500" class="quick-btn">+500 ml</button>
+          </div>
+        </div>
+
+        <!-- 4. Active Exercise Time -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">EXERCISE TIME</span>
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-group">
+            <span class="metric-number" id="dashActiveMins">35</span>
+            <span class="metric-unit">mins</span>
+            <div class="metric-sub">Goal: <span id="goalMinsText">45</span> mins</div>
+            <div class="progress-track">
+              <div id="barTime" class="progress-fill" style="width: 77%; background: #10b981;"></div>
+            </div>
+          </div>
+          <a href="workouts.html" class="btn btn-secondary btn-sm" style="margin-top: 10px; justify-content: center;">Start Workout →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Stream -->
+    <div class="dashboard-grid">
+      <!-- Today's Logged Workouts -->
+      <div class="card" style="grid-column: span 7;">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">⚡</div>
+            Today's Workouts
+          </div>
+          <a href="workouts.html" class="btn btn-secondary btn-sm">View All</a>
+        </div>
+        <div class="activity-list" id="dashboardWorkoutList">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- Quick Nutrition Snapshot -->
+      <div class="card" style="grid-column: span 5;">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🥗</div>
+            Nutrition Summary
+          </div>
+          <a href="nutrition.html" class="btn btn-secondary btn-sm">Log Meal</a>
+        </div>
+        <div class="activity-list" id="dashboardMealList">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Quick Log Modal Dialog -->
+  <div class="modal-overlay" id="quickLogModal">
+    <div class="modal-window">
+      <div class="card-header">
+        <h3 style="font-size: 1.1rem; font-weight: 700;">Quick Log Workout</h3>
+        <button id="closeModalBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;">✕</button>
+      </div>
+      <form id="quickLogForm">
+        <div class="form-group">
+          <label class="form-label">Workout Name</label>
+          <input type="text" id="modalWorkoutName" class="form-input" placeholder="e.g. Evening Cycling" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="modalCategory" class="form-select">
+            <option value="Cardio">Cardio / Running 🏃</option>
+            <option value="Strength">Strength / Weights 🏋️</option>
+            <option value="HIIT">HIIT Interval ⚡</option>
+            <option value="Yoga">Yoga & Mobility 🧘</option>
+          </select>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Duration (Mins)</label>
+            <input type="number" id="modalDuration" class="form-input" value="30" min="5" max="300" required>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label class="form-label">Est. Calories</label>
+            <input type="number" id="modalCalories" class="form-input" value="250" min="10" max="2000" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">Save Workout</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

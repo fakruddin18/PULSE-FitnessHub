@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse | Settings & Preferences</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Theme color picker pills */
+    .color-swatches {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .color-swatch-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      border: 2px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      color: #fff;
+    }
+    .color-swatch-btn:hover {
+      transform: scale(1.1);
+    }
+    .color-swatch-btn.active {
+      border-color: #fff;
+      box-shadow: 0 0 15px currentColor;
+    }
+    .swatch-emerald { background: #10b981; }
+    .swatch-cyan { background: #06b6d4; }
+    .swatch-purple { background: #8b5cf6; }
+    .swatch-rose { background: #f43f5e; }
+
+    .danger-zone {
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      background: rgba(244, 63, 94, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-title">Pulse <span class="brand-tag">Hub</span></div>
+      </a>
+
+      <!-- Page Links -->
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><span>Overview</span></a></li>
+        <li><a href="workouts.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M6 8H5a4 4 0 0 0 0 8h1"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg><span>Workouts</span></a></li>
+        <li><a href="nutrition.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 12h20"></path><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg><span>Nutrition</span></a></li>
+        <li><a href="analytics.html" class="nav-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg><span>Analytics</span></a></li>
+        <li><a href="settings.html" class="nav-link active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>Settings</span></a></li>
+      </ul>
+
+      <!-- Streak -->
+      <div class="nav-actions">
+        <div class="streak-pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.163-7.333-3.856-7.333 3.856 1.399-8.163-5.934-5.784 8.2-1.192zm0 5.702l-2.228 4.516-4.981.724 3.604 3.513-.85 4.958 4.455-2.342 4.455 2.342-.85-4.958 3.604-3.513-4.981-.724z"/></svg>
+          <span id="streakCount">6</span> Days
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Settings & Preferences</h1>
+        <p>Customize your profile, configure daily health goals, and switch themes.</p>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Left Column: Goals & Profile -->
+      <div class="card" style="grid-column: span 7;">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🎯</div>
+            Daily Targets & Goals
+          </div>
+        </div>
+
+        <form id="goalsForm">
+          <div class="form-group">
+            <label class="form-label">Profile Name</label>
+            <input type="text" id="settingProfileName" class="form-input" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Daily Calories Goal (kcal)</label>
+              <input type="number" id="settingCalGoal" class="form-input" min="500" max="10000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Daily Water Goal (ml)</label>
+              <input type="number" id="settingWaterGoal" class="form-input" min="500" max="10000" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Daily Step Goal (steps)</label>
+              <input type="number" id="settingStepGoal" class="form-input" min="1000" max="50000" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Active Exercise Time (mins)</label>
+              <input type="number" id="settingMinsGoal" class="form-input" min="10" max="300" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top: 8px;">
+            Save Goal Preferences
+          </button>
+        </form>
+      </div>
+
+      <!-- Right Column: Theme & Data Management -->
+      <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 20px;">
+        <!-- Accent Theme Picker -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color: #8b5cf6;">🎨</div>
+              Accent Theme
+            </div>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Choose your personal dashboard glow and accent palette.</p>
+          
+          <div class="color-swatches">
+            <button class="color-swatch-btn swatch-emerald active" data-color="emerald" title="Emerald Green">✓</button>
+            <button class="color-swatch-btn swatch-cyan" data-color="cyan" title="Cyan Sky"></button>
+            <button class="color-swatch-btn swatch-purple" data-color="purple" title="Royal Purple"></button>
+            <button class="color-swatch-btn swatch-rose" data-color="rose" title="Rose Neon"></button>
+          </div>
+        </div>
+
+        <!-- Data Backup & Reset -->
+        <div class="card danger-zone">
+          <div class="card-header">
+            <div class="card-title" style="color: #f43f5e;">
+              <span>⚠️</span> Data Management
+            </div>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
+            Export a copy of your logs or reset everything back to the original demo dataset.
+          </p>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="exportJsonBtn" class="btn btn-secondary btn-sm">
+              ⬇️ Export Backup (JSON)
+            </button>
+            <button id="resetDataBtn" class="btn btn-sm" style="background: rgba(244, 63, 94, 0.2); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.4);">
+              Reset All Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>
