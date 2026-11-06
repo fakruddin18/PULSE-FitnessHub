@@ -1,6 +1,15 @@
 # Pulse | Fitness & Wellness Hub
 
-A modern, multi-page frontend web application built using pure **HTML5, CSS3, and JavaScript (ES6+)**.
+> **Pulse** is a lightweight, responsive 5-page fitness and health tracking web application built with pure **HTML5, CSS3, and modern JavaScript (ES6+)**. It features concentric activity rings, an audio-synthesized HIIT interval timer, food & macro tracking, interactive SVG performance analytics, and dynamic theme customization with local storage persistence.
+
+---
+
+## 🌟 Highlights
+- ⚡ **Zero External Dependencies** — Runs completely in the browser without bundlers or heavy frameworks.
+- 🎯 **5 Core Hubs** — Dashboard overview, HIIT workouts & timer, nutrition & macros, analytics & heatmaps, and customizable settings.
+- 🔊 **Web Audio Synthesizer** — Built-in procedural audio beeps for interval workout transitions.
+- 📊 **Pure SVG Visualizations** — Dynamic concentric rings and weekly bar charts with zero chart libraries.
+- 🎨 **Glassmorphism Dark UI** — 4 switchable accent themes with persistent user state via `localStorage`.
 
 ---
 
