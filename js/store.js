@@ -8,7 +8,7 @@ const STORAGE_KEY = 'pulse_fitness_data_v1';
 // Default initial dataset
 const DEFAULT_DATA = {
   profile: {
-    name: 'Alex Rivera',
+    name: 'Munna',
     streak: 6,
     accent: 'emerald' // emerald, cyan, purple, rose
   },
@@ -54,7 +54,12 @@ class PulseStore {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        if (parsed && parsed.profile && (parsed.profile.name === 'Alex Rivera' || !parsed.profile.name)) {
+          parsed.profile.name = 'Munna';
+          this.save(parsed);
+        }
+        return parsed;
       }
     } catch (e) {
       console.warn('Could not read from localStorage, using default data', e);
