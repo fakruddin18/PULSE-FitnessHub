@@ -101,6 +101,93 @@
       background: rgba(244, 63, 94, 0.1);
     }
 
+    /* Food Autocomplete & Smart Calculation */
+    .food-search-wrapper {
+      position: relative;
+    }
+    .food-suggestions-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #111827;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
+      max-height: 230px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+    }
+    .food-suggestions-dropdown.active {
+      display: block;
+    }
+    .food-suggestion-item {
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.15s;
+    }
+    .food-suggestion-item:last-child {
+      border-bottom: none;
+    }
+    .food-suggestion-item:hover, .food-suggestion-item.highlighted {
+      background: rgba(16, 185, 129, 0.15);
+    }
+    .food-sug-name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-main);
+    }
+    .food-sug-badge {
+      font-size: 0.72rem;
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-primary);
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+    .food-sug-details {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
+    .food-not-found-hint {
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .calc-pill {
+      font-size: 0.72rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .remember-food-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      margin-top: 10px;
+      user-select: none;
+    }
+    .remember-food-check input {
+      accent-color: var(--accent-primary);
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
       .macro-overview-card {
         grid-template-columns: 1fr;
@@ -219,18 +306,40 @@
 
         <form id="addMealForm">
           <div class="form-group">
-            <label class="form-label">Food / Meal Name</label>
-            <input type="text" id="mealNameInput" class="form-input" placeholder="e.g. Chicken Caesar Wrap" required>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" style="margin-bottom: 0;">Food / Meal Name</label>
+              <span id="autoCalcPill" class="calc-pill" style="display: none;">⚡ Auto-calculated</span>
+            </div>
+            <div class="food-search-wrapper">
+              <input type="text" id="mealNameInput" class="form-input" placeholder="Type food (e.g. Chicken breast, Eggs, Paneer...)" autocomplete="off" required>
+              <div id="foodSuggestions" class="food-suggestions-dropdown"></div>
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Meal Slot</label>
-            <select id="mealTypeSelect" class="form-select">
-              <option value="Breakfast">Breakfast 🥐</option>
-              <option value="Lunch">Lunch 🥗</option>
-              <option value="Dinner">Dinner 🍲</option>
-              <option value="Snack">Snack 🍏</option>
-            </select>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label">Meal Slot</label>
+              <select id="mealTypeSelect" class="form-select">
+                <option value="Breakfast">Breakfast 🥐</option>
+                <option value="Lunch">Lunch 🥗</option>
+                <option value="Dinner">Dinner 🍲</option>
+                <option value="Snack">Snack 🍏</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Portion Size</label>
+              <div style="display: flex; gap: 6px;">
+                <input type="number" id="mealPortionQty" class="form-input" value="100" min="1" step="1" style="flex: 1;" placeholder="Qty">
+                <select id="mealPortionUnit" class="form-select" style="width: 95px; padding: 11px 8px;">
+                  <option value="g">grams (g)</option>
+                  <option value="pcs">pieces</option>
+                  <option value="scoops">scoops</option>
+                  <option value="ml">ml</option>
+                </select>
+              </div>
+            </div>
           </div>
+
           <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
             <div class="form-group">
               <label class="form-label">Calories (kcal)</label>
@@ -251,7 +360,13 @@
               <input type="number" id="mealFatInput" class="form-input" placeholder="12">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+
+          <label class="remember-food-check">
+            <input type="checkbox" id="saveCustomFoodCheck">
+            <span>Save unlisted food to my custom database for next time</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 14px;">
             Add to Daily Log
           </button>
         </form>
